@@ -15,6 +15,8 @@
 // - Account Creation and Management:
 //     + Allow the user, via prompts, to choose between signing up, logging in, or changing the password.
 //     + If the user only writes "exit," they exit the current process, and the choice question is asked again.
+let data = []
+let name, email, age, password;
 let account = prompt(
   "1 - Sign up\n" +
   "2 - Login\n" +
@@ -22,22 +24,10 @@ let account = prompt(
   'Type "exit" to cancel'
 );
 if(account ==="1"){
- let name = prompt("Name:");
-let email = prompt("Email:");
-let age = prompt("Age:");
-let password = prompt("Password:");
-
-}
-if(account === "2"){
-  alert("login")
-}
-if (account === "3") {
-  alert("Change password");
-}
-
-if (account === "exit") {
-  alert("Exit");
-}
+  name = prompt("Name:");
+ email = prompt("Email:");
+ age = prompt("Age:");
+password = prompt("Password:");
 //         * If the user chooses to sign up, here are the details they must enter:
 //             # Name (Full):
 //             - Check for leading or trailing spaces.
@@ -67,9 +57,12 @@ name = words.join(' ');
 for (let i = 0; i < name.length; i++) {
     if (name[i] !== ' ') letter++;
 }
-if (letter < 5) {return "Name is too short"}
+if (letter < 5) {return "Name is too short",
+alert("Name is too short")
+}
 else {
-   return "name valid"
+   return "name valid",
+   alert("name valid")
 };
 
 }
@@ -83,7 +76,8 @@ function Characters(name) {
         }
     }
 }
-console.log(Characters("aymen"));   
+data.push(name)
+// console.log(name);   
 
 
 // Example:
@@ -94,9 +88,9 @@ console.log(Characters("aymen"));
 //             - Do not save the Email if it has fewer than 10 characters (excluding spaces).
 //             - Do not save the Email if it does not contain exactly one "@" symbol.
 //             - Ensure the email is unique.
-let accounts = []; 
-
+let acct = []
 function validateEmail(email) {
+
     let lowerEmail = email.toLowerCase(); 
 // 
     if (email !== lowerEmail.trim()) {
@@ -112,19 +106,21 @@ function validateEmail(email) {
     let atCount = email.split("@").length - 1;
     if (atCount !== 1) return { valid: false, message: "Email must contain exactly one @" };
 // 
-    let exists = accounts.some(acc => acc.email === email);
+    let exists = acct.some(acc => acc.email === email);
     if (exists) return { valid: false, message: "Email already used" };
 
     return { valid: true, email };
 }
 
-let result = validateEmail(email);
+  let result = validateEmail(email);
 
 if (result.valid) {
     alert("Email saved: " + result.email);
 } else {
     alert(result.message);
 }
+data.push(email)
+// console.log(email);
 
 //             # Age:
 //             - Check for leading, trailing, or middle spaces.
@@ -148,27 +144,89 @@ let ageResult = validateAge(age);
 if (ageResult.valid) {
     alert("Age saved: " + ageResult.age);
 } else {
-    alert(age.result);
+    alert(ageresult.message);
 }
+data.push(age)
+// console.log(age);
+
 
 //             # Password:
 //             - Check for leading or trailing spaces.
 //             - Do not save the Password if it has spaces in the middle.
 //             - Require at least one special character from the set: ["@", "#", "-", "+", "*", "/"].
 //             - Require at least 7 characters to confirm the password.
+function validatePassword(password) {
+    password = password.trim();
 
+    if (password.includes(" ")) {
+        return "Password cannot contain spaces in the middle";
+    }
 
-  
- }
+    if (password.length < 7) {
+        return "Password must be at least 7 characters";
+    }
+
+    // check spécial characters
+    let specialChars = ["@", "#", "-", "+", "*", "/"];
+    let hasSpecial = specialChars.some(char => password.includes(char));
+    if (!hasSpecial) {
+        return "Password must contain at least one special character (@, #, -, +, *, /)";
+    }
+
+    return "Password is valid";
+}
 //             # Password_confirmed:
 //             - The user must re-enter their exact password; otherwise, they are blocked.
 
+if(!validatePassword(password)){
+  alert("password not valid")
+}else{
+  let confirm = prompt("3awd dakhl password");
+  if(confirm === password){
+    alert('bravo howa hadak')
+  }else{
+    alert("you are blokedd password not match")
+  }
+}
+data.push(password)
+
+// console.log(password);
+console.log(data);
+}
+if(account === "2"){
+  alert("login")
 //         ! If the user chooses to log in, here are the details they must enter:
 //             # Email:
 //             - Check if the email exists in our Database.
-            
+
 //             # Password:
 //             - Check if the entered password is associated with the previously entered email.
+function login(){
+   
+    let passwordLogin = prompt("Enter your password:");
+ let accoun = data.find(acc => acc.email === emailLogin);
+    if(!accoun){
+        alert("Email not found!");
+        return;
+    }
+
+    if(accoun.password !== passwordLogin){
+        alert("Wrong password!");
+        return;
+    }
+
+    alert("Welcome back" + accoun.name);
+}
+}
+if (account === "3") {
+  alert("Change password");
+}
+
+if (account === "exit") {
+  alert("Exit");
+}
+
+
 
 //         & If the user chooses to change the password:
 //             - They must enter their existing Email in the Database.
