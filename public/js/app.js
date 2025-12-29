@@ -76,8 +76,6 @@ function Characters(name) {
         }
     }
 }
-data.push(name)
-// console.log(name);   
 
 
 // Example:
@@ -119,8 +117,6 @@ if (result.valid) {
 } else {
     alert(result.message);
 }
-data.push(email)
-// console.log(email);
 
 //             # Age:
 //             - Check for leading, trailing, or middle spaces.
@@ -146,8 +142,6 @@ if (ageResult.valid) {
 } else {
     alert(ageresult.message);
 }
-data.push(age)
-// console.log(age);
 
 
 //             # Password:
@@ -188,9 +182,13 @@ if(!validatePassword(password)){
     alert("you are blokedd password not match")
   }
 }
-data.push(password)
+data.push({
+  name: name,
+  email: email,
+  age: age,
+  password: password
+});
 
-// console.log(password);
 console.log(data);
 }
 if(account === "2"){
@@ -201,10 +199,13 @@ if(account === "2"){
 
 //             # Password:
 //             - Check if the entered password is associated with the previously entered email.
-function login(){
-   
+
+  function login(){
+    let emailLogin = prompt("Enter your email:");
     let passwordLogin = prompt("Enter your password:");
- let accoun = data.find(acc => acc.email === emailLogin);
+
+    let accoun = data.find(acc => acc.email === emailLogin);
+
     if(!accoun){
         alert("Email not found!");
         return;
@@ -215,9 +216,12 @@ function login(){
         return;
     }
 
-    alert("Welcome back" + accoun.name);
+    alert("Welcome back " + accoun.name);
+  }
+
+  login();
 }
-}
+
 if (account === "3") {
   alert("Change password");
 }
