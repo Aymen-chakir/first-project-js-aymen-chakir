@@ -15,13 +15,29 @@
 // - Account Creation and Management:
 //     + Allow the user, via prompts, to choose between signing up, logging in, or changing the password.
 //     + If the user only writes "exit," they exit the current process, and the choice question is asked again.
-let choice = prompt(
+let account = prompt(
   "1 - Sign up\n" +
   "2 - Login\n" +
   "3 - Change password\n" +
   'Type "exit" to cancel'
 );
+if(account ==="1"){
+ let name = prompt("Name:");
+// let email = prompt("Email:");
+// let age = prompt("Age:");
+// let password = prompt("Password:");
 
+}
+if(account === "2"){
+  alert("login")
+}
+if (account === "3") {
+  alert("Change password");
+}
+
+if (account === "exit") {
+  alert("Exit");
+}
 //         * If the user chooses to sign up, here are the details they must enter:
 //             # Name (Full):
 //             - Check for leading or trailing spaces.
@@ -30,7 +46,50 @@ let choice = prompt(
 //             - Check that all other characters are in lowercase.
 //             - Do not save the Name if it has less than 5 characters (excluding spaces).
 //             - Do not save the Name if it contains numbers, "@", or similar special characters.
+function detailsofname(name){
+  
+  name = name.trim();
+  
+  // 2
+  name = name[0].toUpperCase() + name.slice(1);
+// 3
+let words = name.split(' ');
 
+for (let i = 0; i < words.length; i++) {
+    if (words[i].length > 0) {
+        words[i] = words[i][0].toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+}
+
+name = words.join(' ');
+  
+    let letter = 0;
+for (let i = 0; i < name.length; i++) {
+    if (name[i] !== ' ') letter++;
+}
+if (letter < 5) {return "Name is too short"}
+else {
+   return "name valid"
+};
+
+}
+function Characters(name) {
+    for (let i = 0; i < name.length; i++) {
+        let char = name[i];
+        if (!((char == Number|| char == '@')  || char === ' ')) {
+            return "Name contains invalid characters";
+        }
+    }
+    return "Name is valid";
+}
+
+console.log(Characters("AYmen chakir")); 
+console.log(Characters("aymen123"));   
+
+
+
+
+// Example:
 //             # Email:
 //             - Check for leading or trailing spaces.
 //             - Convert all letters to lowercase.
