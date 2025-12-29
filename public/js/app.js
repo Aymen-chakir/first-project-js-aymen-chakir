@@ -158,7 +158,6 @@ if (ageResult.valid) {
 //             - Require at least 7 characters to confirm the password.
 
 
- function validatepassword(password){
   
  }
 //             # Password_confirmed:
