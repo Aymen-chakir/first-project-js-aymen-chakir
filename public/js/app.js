@@ -23,9 +23,9 @@ let account = prompt(
 );
 if(account ==="1"){
  let name = prompt("Name:");
-// let email = prompt("Email:");
-// let age = prompt("Age:");
-// let password = prompt("Password:");
+let email = prompt("Email:");
+let age = prompt("Age:");
+let password = prompt("Password:");
 
 }
 if(account === "2"){
@@ -76,17 +76,14 @@ else {
 function Characters(name) {
     for (let i = 0; i < name.length; i++) {
         let char = name[i];
-        if (!((char == Number|| char == '@')  || char === ' ')) {
-            return "Name contains invalid characters";
+        if (!(( char == '@')  || char === ' ')) {
+            return "Name is valid";
+        }else{
+              "Name contains invalid characters";
         }
     }
-    return "Name is valid";
 }
-
-console.log(Characters("AYmen chakir")); 
-console.log(Characters("aymen123"));   
-
-
+console.log(Characters("aymen"));   
 
 
 // Example:
@@ -97,11 +94,62 @@ console.log(Characters("aymen123"));
 //             - Do not save the Email if it has fewer than 10 characters (excluding spaces).
 //             - Do not save the Email if it does not contain exactly one "@" symbol.
 //             - Ensure the email is unique.
+let accounts = []; 
+
+function validateEmail(email) {
+    let lowerEmail = email.toLowerCase(); 
+// 
+    if (email !== lowerEmail.trim()) {
+        return { valid: false, message: "Email has leading or trailing spaces" };
+    }
+// 
+    email = lowerEmail;
+// 
+    if (email.includes(" ")) return { valid: false, message: "Email cannot contain spaces" };
+// 
+    if (email.length < 10) return { valid: false, message: "Email is too short" };
+// 
+    let atCount = email.split("@").length - 1;
+    if (atCount !== 1) return { valid: false, message: "Email must contain exactly one @" };
+// 
+    let exists = accounts.some(acc => acc.email === email);
+    if (exists) return { valid: false, message: "Email already used" };
+
+    return { valid: true, email };
+}
+
+let result = validateEmail(email);
+
+if (result.valid) {
+    alert("Email saved: " + result.email);
+} else {
+    alert(result.message);
+}
 
 //             # Age:
 //             - Check for leading, trailing, or middle spaces.
 //             - Verify that only digits are entered.
 //             - Do not save the Age if it has 0 characters, or if it has 3 characters or more.
+function validateAge(age) {
+
+    if (age.includes(" ")) return { valid: false, message: "Age cannot contain spaces" };
+
+    if (!(/^\d+$/.test(age))) 
+    return { valid: false, message: "Age must contain only digits" };
+if (age.length === 0) 
+    return { valid: false, message: "Age cannot be empty" };
+if (age.length >= 3) 
+    return { valid: false, message: "Age cannot have 3 or more digits" };
+
+    return { valid: true, age: Number(age) };
+}
+let ageResult = validateAge(age);
+
+if (ageResult.valid) {
+    alert("Age saved: " + ageResult.age);
+} else {
+    alert(age.result);
+}
 
 //             # Password:
 //             - Check for leading or trailing spaces.
@@ -109,6 +157,10 @@ console.log(Characters("aymen123"));
 //             - Require at least one special character from the set: ["@", "#", "-", "+", "*", "/"].
 //             - Require at least 7 characters to confirm the password.
 
+
+ function validatepassword(password){
+  
+ }
 //             # Password_confirmed:
 //             - The user must re-enter their exact password; otherwise, they are blocked.
 
