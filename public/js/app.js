@@ -23,6 +23,8 @@ let account = prompt(
   "3 - Change password\n" +
   'Type "exit" to cancel'
 );
+ 
+
 if(account ==="1"){
   name = prompt("Name:");
  email = prompt("Email:");
@@ -182,6 +184,10 @@ if(!validatePassword(password)){
     alert("you are blokedd password not match")
   }
 }
+alert("Signup successful");
+
+}
+console.log(data);
 data.push({
   name: name,
   email: email,
@@ -189,18 +195,17 @@ data.push({
   password: password
 });
 
-console.log(data);
-}
+
+// *******************************************************
 if(account === "2"){
-  alert("login")
+  account = prompt("login","enter ur email")
 //         ! If the user chooses to log in, here are the details they must enter:
 //             # Email:
 //             - Check if the email exists in our Database.
 
 //             # Password:
 //             - Check if the entered password is associated with the previously entered email.
-
-  function login(){
+  function loginn(){
     let emailLogin = prompt("Enter your email:");
     let passwordLogin = prompt("Enter your password:");
 
@@ -219,11 +224,11 @@ if(account === "2"){
     alert("Welcome back " + accoun.name);
   }
 
-  login();
 }
-
 if (account === "3") {
   alert("Change password");
+
+
 }
 
 if (account === "exit") {
